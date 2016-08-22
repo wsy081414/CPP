@@ -1,4 +1,4 @@
- _CRT_SECURE_NO_WARNINGS 1
+#define _CRT_SECURE_NO_WARNINGS 1
 
 #include<iostream>
 #include<cstdlib>
@@ -38,6 +38,7 @@ public:
 		_data[0] = tmp;
 		_sz++;
 	}
+
 	void pop_front()
 	{
 		memmove(_data, _data + 1, (_sz - 1)*sizeof(DataType));
@@ -64,6 +65,40 @@ public:
 		_data[pos-1] = d;
 		_sz++;
 	
+	}
+	void remove(const DataType & x)
+	{
+		if (_sz == 0)
+		{
+			return;
+		}
+		for (int i = 0; i < _sz; i++)
+		{
+			if (_data[i] == x)
+			{
+				memmove(_data + i, _data + i +1, _sz - i+1*sizeof(DataType));
+				_sz--;
+				return;
+			}
+		}
+	}
+	void removeall(int x)
+	{
+
+		if (_sz == 0)
+		{
+			return;
+		}
+		for (int i = 0; i < _sz; i++)
+		{
+			if (_data[i] == x)
+			{
+				memmove(_data + i, _data + i + 1, _sz - i + 1 * sizeof(DataType));
+				_sz--;
+				i--;
+				
+			}
+		}
 	}
 	void sort()
 	{
@@ -130,7 +165,7 @@ void test()
 	mylist.push_back(9);
 	mylist.push_back(11);
 	
-	mylist.push_front(16);
+	mylist.Pushfront(16);
 	cout << mylist << endl;
 	cout << mylist.seq_size() << endl;
 	cout << mylist.seq_capacity() << endl;
@@ -142,14 +177,28 @@ void test()
 	cout << mylist.seq_capacity() << endl;
 
 	mylist.sort();
+	mylist.remove(11);
 	cout << mylist << endl;
 	cout << mylist.seq_size() << endl;
 	cout << mylist.seq_capacity() << endl;
 
 }
+void test1()
+{
+	SeqList mylist;
+	mylist.push_back(5);
+	
+	mylist.push_back(8);
+	
+	mylist.Pushfront(16);
+
+
+	cout << mylist << endl;
+
+}
 int main()
 {
-	test();
+	test1();
 	system("pause");
 	return 0;
 }
