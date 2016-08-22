@@ -165,7 +165,7 @@ void test()
 	mylist.push_back(9);
 	mylist.push_back(11);
 	
-	mylist.Pushfront(16);
+	
 	cout << mylist << endl;
 	cout << mylist.seq_size() << endl;
 	cout << mylist.seq_capacity() << endl;
@@ -190,7 +190,7 @@ void test1()
 	
 	mylist.push_back(8);
 	
-	mylist.Pushfront(16);
+	mylist.push_front(16);
 
 
 	cout << mylist << endl;
