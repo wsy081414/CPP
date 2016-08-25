@@ -111,6 +111,7 @@ public:
 				if (_data[j]>_data[j + 1])
 				{
 					std::swap(_data[j], _data[j + 1]);
+					flag=0;
 				}
 			}
 			if (flag)
