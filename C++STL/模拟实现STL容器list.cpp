@@ -3,7 +3,9 @@
 #include<iostream>
 #include<cstdlib>
 #include<list>
+#include<vector>
 using namespace std;
+
 
 template<class T>
 struct __ListNode
@@ -26,6 +28,8 @@ struct __List_Iterator
 {
 	typedef __List_Iterator<T, T&, T*> Iterator;
 	typedef __List_Iterator<T, Ref, Ptr> Self;
+	typedef __List_Iterator<T, const T&, const T*> Const_Iterator;
+
 	typedef __ListNode<T>* ListNode;
 	typedef Ref Reference;
 
@@ -78,7 +82,7 @@ struct __List_Iterator
 	Ptr operator->() const
 	{
 
-		return &((*node));
+		return &((*_node)._data);
 	}
 
 	ListNode _node;
@@ -91,7 +95,7 @@ protected:
 	typedef  __ListNode<T> Node_Type;
 public:
 	typedef __List_Iterator<T, T&, T*>  Iterator;
-	typedef __List_Iterator<const T, const T&, const T*> Const_Iterator;
+	typedef __List_Iterator< T, const T&, const T*> Const_Iterator;
 	typedef size_t Size_Type;
 	typedef T& Reference;
 public:
@@ -108,14 +112,25 @@ public:
 		_node->_next = _node;
 		_node->_prev = _node;
 	}
+	
+	Const_Iterator CBegin() const
+	{
+		return _node->_next;
+	}
+	Const_Iterator CEnd() const
+	{
+		return _node;
+	}
+	
 	Iterator Begin()
 	{
-		return (Iterator)(_node->_next);
+		return _node->_next;
 	}
-	Iterator End()
+	Iterator End() 
 	{
-		return (Iterator)(_node);
+		return _node;
 	}
+	
 public:
 	bool Empty() const
 	{
@@ -212,11 +227,57 @@ void test1()
 
 }
 
+struct A
+{
+	int a;
+};
+
+void test()
+{
+	List<A> d;
+	
+	List<A>::Iterator begin = d.Begin();
+	
+	while (begin!=d.End())
+	{
+		cout;
+
+	}
+}
+void test2()
+{
+	vector<int > s = { 1, 2, 3, 4, 5, 6, 7, 8 };
+	auto begin = s.rbegin();
+	auto end = s.rend();
+	while (begin != end)
+	{
+		cout << *begin << endl;
+		begin++;
+	}
+}
+void test3()
+{
+	List<int >l;
+	l.Push_Back(1);
+	l.Push_Back(2);
+	l.Push_Back(3);
+	l.Push_Back(4);
+
+
+
+}
+
+void test4()
+{
+	List<int >l;
+	List<int >::Const_Iterator begin = l.CBegin();
+	//*begin = 15;
+}
 int main()
 {
-	test1();
+	test4();
 
 
-	system("pause");
+   	system("pause");
 	return 0;
 }
