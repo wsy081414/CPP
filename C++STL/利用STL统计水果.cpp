@@ -57,13 +57,23 @@ void test()
 	map<string, int>::iterator begin = fruitmap.begin();
 	map<string, int>::iterator end = fruitmap.end();
 	
+	//也可以直接利用vector的构造函数构造一段迭代器区间。
+	//std::vector<pair<string, int>> sortvector(fruitmap.begin(), fruitmap.end());
+	
+	//也可以直接插入迭代器
+	std::vector<map<string, int>::iterator> sortvector;
+	
+	
 	std::vector<pair<string, int>> sortvector;
 	//进行插入到堆排序
-	for (size_t i = 0; begin != end; i++)
-	{
-		sortvector.push_back(pair<string,int>(begin->first, begin->second));
-		begin++;
-	}
+	// for (size_t i = 0; begin != end; i++)
+	// {
+		// sortvector.push_back(pair<string,int>(begin->first, begin->second));
+		// begin++;
+	// }
+	
+	sortvector.insert(sortvector.begin(),begin,end);
+	
 	
 	//进行堆排序
 	make_heap(sortvector.begin(), sortvector.end(), comparepair());
