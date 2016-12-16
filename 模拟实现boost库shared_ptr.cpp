@@ -28,12 +28,17 @@ public:
 		(*_pCount)++;
 	}
 	//现代写法
+	
+	//在这里把a和this进行交换，然后再析构a的时候，这个时候会让原来_ptr的count--。
+	//然后_ptr又指向了a，在这里创建了a的零时变量，这个时候就会给_count++。
+	
 	SharedPtr<T> operator = (SharedPtr<T> sp)
 	{
 		std::swap(_ptr, sp._ptr);
 		std::swap(_pCount, sp._pCount);
 	}
 	//传统写法
+	
 	/*SharedPtr<T> operator = (SharedPtr<T>& sp)
 	{
 		if (this != &sp)
